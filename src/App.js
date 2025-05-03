@@ -1,11 +1,16 @@
 import Header from './components/Header/Header';
+import CreateFlashCard from './components/CreateFlashCard/CreateFlashCard';
 
 import './css-reset.css';
 import './App.css';
 
 function App() {
   return (
-    <Header />
+    <>
+      <Header />
+      <CreateFlashCard />
+    </>
+
   );
 }
 
