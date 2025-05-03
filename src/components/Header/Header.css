@@ -1,0 +1,40 @@
+.header {
+    height: 150px;
+    background-color: #8DA9C4;
+    font-family: "Mulish", sans-serif;
+    color: #EEF4ED;
+
+    ul {
+        height: 150px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        li {
+            list-style-type: none;
+        }
+
+        .list__cards {
+            background-color: #8DA9C4;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #EEF4ED;
+            font-weight: 500;
+        }
+
+        .btn-create {
+            cursor: pointer;
+            display: flex;
+            font-size: 24px;
+            gap: 15px;
+            font-weight: 500;
+        }
+
+        .heading {
+            font-weight: 700;
+        }
+    }
+
+
+}
