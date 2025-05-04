@@ -14,12 +14,25 @@
         }
 
         .list__cards {
+            width: 200px;
             background-color: #8DA9C4;
             border: none;
             cursor: pointer;
             font-size: 24px;
             color: #EEF4ED;
             font-weight: 500;
+
+            &:hover {
+                text-shadow: 5px 5px 10px rgba(0, 0, 0, .2);
+                font-size: 26px;
+                transition: 0.15s ease-in;
+            }
+
+            &:active {
+                text-shadow: 10px 10px 5px rgba(0, 0, 0, .2);
+                font-size: 28px;
+                color: #0B2545;
+            }
         }
 
         .btn-create {
@@ -28,6 +41,18 @@
             font-size: 24px;
             gap: 15px;
             font-weight: 500;
+            width: 150px;
+
+            &:hover {
+                font-size: 25px;
+                transition: 0.12s ease-in-out;
+            }
+
+            &:active {
+                text-shadow: 10px 10px 5px rgba(0, 0, 0, .2);
+                font-size: 28px;
+                color: #0B2545;
+            }
         }
 
         .heading {
