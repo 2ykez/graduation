@@ -11,7 +11,27 @@ function FlashCardsList({ words }) {
         )
     } else {
         return (
-            <h1>Hello world</h1>
+            <div className='list__words'>
+                <h2>Мои карточки</h2>
+                <ul className='list'>
+                    <li><div className="word">
+                        <div className="word__meaning">
+                            <p className='term'>{words[0].word}</p>
+                            <p className='meaning'>{words[0].meaning}</p>
+                        </div>
+                        <button className='delete'>Удалить</button>
+                    </div>
+                    </li>
+                    <li><div className="word">
+                        <div className="word__meaning">
+                            <p className='term'>{words[1].word}</p>
+                            <p className='meaning'>{words[1].meaning}</p>
+                        </div>
+                        <button className='delete'>Удалить</button>
+                    </div>
+                    </li>
+                </ul>
+            </div>
         )
     }
 

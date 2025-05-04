@@ -11,7 +11,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: [{ word: 'hy', meaning: 're' }]
+      words: [{ word: 'orange', meaning: 'the fruit of a tree in the family Rutaceae.' },
+      { word: 'plum', meaning: 'an oval fleshy fruit which is purple' }
+      ]
     }
   }
 
