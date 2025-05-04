@@ -1,23 +1,55 @@
+import { Component } from 'react';
+
 import './CreateFlashCard.css';
 
-function CreateFlashCard() {
-    return (
-        <form className='create'>
-            <h2 className='heading-s'>Создать карточку</h2>
-            <div className="inputs-form">
-                <div>
-                    <label htmlFor="term">Термин</label>
-                    <input type="text" placeholder='Введите термин' id='term' />
-                </div>
-                <div><label htmlFor="meaning">Значение</label>
-                    <textarea id="meaning" placeholder='Введите значение'></textarea>
-                </div>
+class CreateFlashCard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            term: '',
+            meaning: ''
+        }
+    }
 
+    onChangeTerm = (e) => {
+        this.setState({
+            term: e.target.value
+        })
+    }
 
-            </div>
-            <button className='btn-submit' type="submit">Создать карточку</button>
-        </form>
-    )
+    onChangeMeaning = (e) => {
+        this.setState({
+            meaning: e.target.value
+        })
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        console.log('hi');
+        this.setState({
+            term: '',
+            meaning: ''
+        })
+    }
+
+    render() {
+        return (
+            <form className='create' onSubmit={this.onSubmit}>
+                <h2 className='heading-s'>Создать карточку</h2>
+                <div className="inputs-form">
+                    <div>
+                        <label htmlFor="term">Термин</label>
+                        <input type="text" placeholder='Введите термин' value={this.state.term} id='term' required onChange={this.onChangeTerm} />
+                    </div>
+                    <div><label htmlFor="meaning">Значение</label>
+                        <textarea id="meaning" placeholder='Введите значение' value={this.state.meaning} required onChange={this.onChangeMeaning}></textarea>
+                    </div>
+                </div>
+                <button className='btn-submit' type="submit">Создать карточку</button>
+            </form>
+        )
+    }
+
 }
 
 export default CreateFlashCard;

@@ -14,7 +14,8 @@ class App extends Component {
       showForm: false,
       showList: false,
       words: [{ word: 'orange', meaning: 'the fruit of a tree in the family Rutaceae.' },
-      { word: 'plum', meaning: 'an oval fleshy fruit which is purple' }
+      { word: 'plum', meaning: 'an oval fleshy fruit which is purple' },
+      { word: 'melon', meaning: ' any of various plants of the family Cucurbitaceae with sweet, edible, and fleshy fruit.' }
       ]
     }
   }

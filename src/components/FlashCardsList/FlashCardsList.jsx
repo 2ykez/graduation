@@ -14,22 +14,16 @@ function FlashCardsList({ words }) {
             <div className='list__words'>
                 <h2>Мои карточки</h2>
                 <ul className='list'>
-                    <li><div className="word">
-                        <div className="word__meaning">
-                            <p className='term'>{words[0].word}</p>
-                            <p className='meaning'>{words[0].meaning}</p>
+                    {words.map((card, index) => (
+                        <li key={index}><div className="word">
+                            <div className="word__meaning">
+                                <p className='term'>{card.word}</p>
+                                <p className='meaning'>{card.meaning}</p>
+                            </div>
+                            <button className='delete'>Удалить</button>
                         </div>
-                        <button className='delete'>Удалить</button>
-                    </div>
-                    </li>
-                    <li><div className="word">
-                        <div className="word__meaning">
-                            <p className='term'>{words[1].word}</p>
-                            <p className='meaning'>{words[1].meaning}</p>
-                        </div>
-                        <button className='delete'>Удалить</button>
-                    </div>
-                    </li>
+                        </li>
+                    ))}
                 </ul>
             </div>
         )
