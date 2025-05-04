@@ -13,10 +13,7 @@ class App extends Component {
     this.state = {
       showForm: false,
       showList: false,
-      words: [{ word: 'orange', meaning: 'the fruit of a tree in the family Rutaceae.' },
-      { word: 'plum', meaning: 'an oval fleshy fruit which is purple' },
-      { word: 'melon', meaning: ' any of various plants of the family Cucurbitaceae with sweet, edible, and fleshy fruit.' }
-      ]
+      words: []
     }
   }
 
@@ -34,13 +31,19 @@ class App extends Component {
     });
   }
 
+  addCard = (newCard) => {
+    this.setState(prevCards => ({
+      words: [...prevCards.words, newCard]
+    }));
+  }
+
   render() {
 
     if (this.state.showForm) {
       return (
         <>
           <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
-          <CreateFlashCard />
+          <CreateFlashCard addCard={this.addCard} />
         </>
       )
     }
@@ -56,3 +59,8 @@ class App extends Component {
 }
 
 export default App;
+
+
+// { word: 'orange', meaning: 'the fruit of a tree in the family Rutaceae.' },
+// { word: 'plum', meaning: 'an oval fleshy fruit which is purple' },
+// { word: 'melon', meaning: ' any of various plants of the family Cucurbitaceae with sweet, edible, and fleshy fruit.' }

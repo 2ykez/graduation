@@ -6,14 +6,14 @@ class CreateFlashCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            term: '',
+            word: '',
             meaning: ''
         }
     }
 
     onChangeTerm = (e) => {
         this.setState({
-            term: e.target.value
+            word: e.target.value
         })
     }
 
@@ -25,9 +25,11 @@ class CreateFlashCard extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+        const { word, meaning } = this.state;
+        this.props.addCard({ word, meaning });
         console.log('hi');
         this.setState({
-            term: '',
+            word: '',
             meaning: ''
         })
     }
@@ -39,7 +41,7 @@ class CreateFlashCard extends Component {
                 <div className="inputs-form">
                     <div>
                         <label htmlFor="term">Термин</label>
-                        <input type="text" placeholder='Введите термин' value={this.state.term} id='term' required onChange={this.onChangeTerm} />
+                        <input type="text" placeholder='Введите термин' value={this.state.word} id='term' required onChange={this.onChangeTerm} />
                     </div>
                     <div><label htmlFor="meaning">Значение</label>
                         <textarea id="meaning" placeholder='Введите значение' value={this.state.meaning} required onChange={this.onChangeMeaning}></textarea>
