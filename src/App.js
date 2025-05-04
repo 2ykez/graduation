@@ -51,7 +51,7 @@ class App extends Component {
     return (
       <>
         <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
-        <FlashCardsList words={this.state.words} />
+        <FlashCardsList words={this.state.words} onShowForm={this.onShowForm} />
       </>
     );
   }
