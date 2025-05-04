@@ -11,19 +11,44 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showForm: false,
+      showList: false,
       words: [{ word: 'orange', meaning: 'the fruit of a tree in the family Rutaceae.' },
       { word: 'plum', meaning: 'an oval fleshy fruit which is purple' }
       ]
     }
   }
 
+  onShowForm = () => {
+    this.setState({
+      showForm: true,
+      showList: false
+    });
+  }
+
+  onShowList = () => {
+    this.setState({
+      showList: true,
+      showForm: false,
+    });
+  }
+
   render() {
+
+    if (this.state.showForm) {
+      return (
+        <>
+          <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
+          <CreateFlashCard />
+        </>
+      )
+    }
+
     return (
       <>
-        <Header />
+        <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
         <FlashCardsList words={this.state.words} />
       </>
-
     );
   }
 
