@@ -78,6 +78,7 @@
             }
 
             .meaning {
+                max-width: 500px;
                 padding-left: 15px;
                 color: #EEF4ED;
                 font-size: 1.2em;
