@@ -1,0 +1,41 @@
+.empty-list {
+    width: 700px;
+    height: 700px;
+    background-color: #8DA9C4;
+    margin: 30px auto 0 auto;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
+
+    .empty-text {
+        padding: 40px 12px 0 12px;
+        font-size: 36px;
+        text-align: center;
+        color: #EEF4ED;
+    }
+
+    .btn__create-word {
+        margin: 175px auto 0 auto;
+        width: 400px;
+        height: 200px;
+        border: none;
+        border-radius: 10px;
+        display: block;
+        background-color: #0B2545;
+        color: #EEF4ED;
+        font-size: 24px;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
+            transition: 0.15s ease-in-out;
+        }
+
+        &:active {
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, .5);
+            transition: 0.15s ease-in-out;
+            color: #0B2545;
+            background-color: #EEF4ED;
+        }
+    }
+}
