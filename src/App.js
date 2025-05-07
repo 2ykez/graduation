@@ -37,6 +37,12 @@ class App extends Component {
     }));
   }
 
+  onDeleteCard = (idToDelete) => {
+    this.setState(prevCards => ({
+      words: prevCards.words.filter(card => card.id !== idToDelete)
+    }))
+  }
+
   render() {
 
     if (this.state.showForm) {
@@ -51,7 +57,7 @@ class App extends Component {
     return (
       <>
         <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
-        <FlashCardsList words={this.state.words} onShowForm={this.onShowForm} />
+        <FlashCardsList words={this.state.words} onShowForm={this.onShowForm} onDeleteCard={this.onDeleteCard} />
       </>
     );
   }

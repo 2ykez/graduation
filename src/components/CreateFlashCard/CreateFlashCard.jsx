@@ -7,7 +7,8 @@ class CreateFlashCard extends Component {
         super(props);
         this.state = {
             word: '',
-            meaning: ''
+            meaning: '',
+            id: 0
         }
     }
 
@@ -25,12 +26,13 @@ class CreateFlashCard extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { word, meaning } = this.state;
-        this.props.addCard({ word, meaning });
+        const { word, meaning, id } = this.state;
+        this.props.addCard({ word, meaning, id });
         console.log('hi');
         this.setState({
             word: '',
-            meaning: ''
+            meaning: '',
+            id: id + 1
         })
     }
 
