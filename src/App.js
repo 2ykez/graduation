@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { auth, db } from './firebase';
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 
 import Header from './components/Header/Header';
 import CreateFlashCard from './components/CreateFlashCard/CreateFlashCard';
@@ -8,6 +8,7 @@ import FlashCardsList from './components/FlashCardsList/FlashCardsList';
 
 import './css-reset.css';
 import './App.css';
+import { onAuthStateChanged } from 'firebase/auth';
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends Component {
     this.state = {
       showForm: false,
       showList: false,
+      loading: true,
       words: []
     }
   }
@@ -54,6 +56,19 @@ class App extends Component {
     }))
   }
 
+  async componentDidMount() {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const querySnapshot = await getDocs(collection(db, `users/${user.uid}/cards`));
+        const words = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+        this.setState({ words, loading: false });
+      } else {
+        this.setState({ loading: false });
+      }
+    })
+  }
+
   render() {
 
     if (this.state.showForm) {
@@ -61,6 +76,15 @@ class App extends Component {
         <>
           <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
           <CreateFlashCard addCard={this.addCard} />
+        </>
+      )
+    }
+
+    if (this.state.loading) {
+      return (
+        <>
+          <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
+          <h1>Loading...</h1>
         </>
       )
     }
