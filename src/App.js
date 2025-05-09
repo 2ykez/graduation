@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import { auth, db } from './firebase';
+import { collection, addDoc } from "firebase/firestore";
 
 import Header from './components/Header/Header';
 import CreateFlashCard from './components/CreateFlashCard/CreateFlashCard';
@@ -31,7 +33,16 @@ class App extends Component {
     });
   }
 
-  addCard = (newCard) => {
+  addCard = async (newCard) => {
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        await addDoc(collection(db, `users/${user.uid}/cards`), newCard);
+        console.log('Карточка добавлена в Firestore');
+      } catch (error) {
+        console.error('Ошибка при добавлении карточек:', error);
+      }
+    }
     this.setState(prevCards => ({
       words: [...prevCards.words, newCard]
     }));

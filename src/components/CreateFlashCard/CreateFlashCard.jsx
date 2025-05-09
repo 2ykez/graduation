@@ -28,7 +28,6 @@ class CreateFlashCard extends Component {
         e.preventDefault();
         const { word, meaning, id } = this.state;
         this.props.addCard({ word, meaning, id });
-        console.log('hi');
         this.setState({
             word: '',
             meaning: '',

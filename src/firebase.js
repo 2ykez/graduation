@@ -1,5 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyB19RHdWXhUejfT2LKZKiKZ_p6sakFmK0c",
@@ -12,4 +14,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+signInAnonymously(auth).catch((error) => {
+    console.error("Ошибка анонимного входа:", error);
+});
+
+export { auth, db };
