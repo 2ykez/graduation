@@ -79,9 +79,12 @@
 
             .meaning {
                 max-width: 500px;
+                height: 100px;
                 padding-left: 15px;
                 color: #EEF4ED;
                 font-size: 1.2em;
+                word-wrap: break-word;
+                white-space: normal;
             }
         }
 
