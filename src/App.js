@@ -1,6 +1,4 @@
 import { Component } from 'react';
-import { auth, db } from './firebase';
-import { collection, addDoc, getDocs } from "firebase/firestore";
 
 import Header from './components/Header/Header';
 import CreateFlashCard from './components/CreateFlashCard/CreateFlashCard';
@@ -8,7 +6,6 @@ import FlashCardsList from './components/FlashCardsList/FlashCardsList';
 
 import './css-reset.css';
 import './App.css';
-import { onAuthStateChanged } from 'firebase/auth';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +13,6 @@ class App extends Component {
     this.state = {
       showForm: false,
       showList: false,
-      loading: true,
       words: []
     }
   }
@@ -35,39 +31,40 @@ class App extends Component {
     });
   }
 
-  addCard = async (newCard) => {
-    const user = auth.currentUser;
-    if (user) {
+  componentDidMount() {
+    const savedCards = localStorage.getItem('flashcards_cards');
+    if (savedCards) {
       try {
-        await addDoc(collection(db, `users/${user.uid}/cards`), newCard);
-        console.log('Карточка добавлена в Firestore');
+        this.setState({ words: JSON.parse(savedCards) });
       } catch (error) {
-        console.error('Ошибка при добавлении карточек:', error);
+        console.error('Ошибка при разборе карточек из localStorage:', error);
       }
     }
-    this.setState(prevCards => ({
-      words: [...prevCards.words, newCard]
-    }));
   }
 
-  onDeleteCard = (idToDelete) => {
-    this.setState(prevCards => ({
-      words: prevCards.words.filter(card => card.id !== idToDelete)
-    }))
-  }
+  saveToLocalStorage = (cards) => {
+    localStorage.setItem('flashcards_cards', JSON.stringify(cards));
+  };
 
-  async componentDidMount() {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const querySnapshot = await getDocs(collection(db, `users/${user.uid}/cards`));
-        const words = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-        this.setState({ words, loading: false });
-      } else {
-        this.setState({ loading: false });
+  addCard = (card) => {
+    this.setState(
+      prevState => {
+        const updatedCards = [...prevState.words, card];
+        this.saveToLocalStorage(updatedCards);
+        return { words: updatedCards };
       }
-    })
-  }
+    );
+  };
+
+  deleteCard = (idToDelete) => {
+    this.setState(
+      prevState => {
+        const updatedCards = prevState.words.filter(card => card.id !== idToDelete);
+        this.saveToLocalStorage(updatedCards);
+        return { words: updatedCards };
+      }
+    );
+  };
 
   render() {
 
@@ -92,7 +89,7 @@ class App extends Component {
     return (
       <>
         <Header onShowForm={this.onShowForm} onShowList={this.onShowList} />
-        <FlashCardsList words={this.state.words} onShowForm={this.onShowForm} onDeleteCard={this.onDeleteCard} />
+        <FlashCardsList words={this.state.words} onShowForm={this.onShowForm} onDeleteCard={this.deleteCard} />
       </>
     );
   }
