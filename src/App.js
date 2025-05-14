@@ -43,6 +43,24 @@ class App extends Component {
     }))
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.words !== this.state.words || prevState.id !== this.state.id) {
+      localStorage.setItem('flashcards', JSON.stringify(this.state.words));
+      localStorage.setItem('flashcards_idCounter', JSON.stringify(this.state.id));
+    }
+  }
+
+  componentDidMount() {
+    const savedCards = localStorage.getItem('flashcards');
+    if (savedCards) {
+      try {
+        this.setState({ words: JSON.parse(savedCards) });
+      } catch (error) {
+        console.error('Ошибка при разборе карточек из localStorage:', error);
+      }
+    }
+  }
+
   render() {
 
     if (this.state.showForm) {

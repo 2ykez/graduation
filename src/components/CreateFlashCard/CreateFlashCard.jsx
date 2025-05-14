@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import './CreateFlashCard.css';
 
@@ -8,7 +9,6 @@ class CreateFlashCard extends Component {
         this.state = {
             word: '',
             meaning: '',
-            id: 0
         }
     }
 
@@ -26,15 +26,13 @@ class CreateFlashCard extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const { word, meaning, id } = this.state;
+        const { word, meaning } = this.state;
+        const id = uuidv4(); // Генерация уникального ID
+
         this.props.addCard({ word, meaning, id });
-        console.log('hi');
-        this.setState({
-            word: '',
-            meaning: '',
-            id: id + 1
-        })
-    }
+        this.setState({ word: '', meaning: '' });
+    };
+
 
     render() {
         return (
