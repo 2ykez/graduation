@@ -63,3 +63,29 @@
 
 
 }
+
+@media screen and (max-width: 456px) {
+    .header {
+        height: 100px;
+
+        ul {
+            height: 100px;
+
+            .list__cards {
+                font-size: 16px;
+            }
+
+            .heading {
+                font-size: 24px;
+            }
+
+            .btn-create {
+                font-size: 16px;
+
+                img {
+                    display: none;
+                }
+            }
+        }
+    }
+}
